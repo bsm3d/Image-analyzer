@@ -15,6 +15,9 @@ Image analyzer is an advanced web application designed to analyze and identify i
 - No registration required
 - Free to use, code publicly available
 
+## Demo
+
+you can use and try it : https://bsm3d.com/img_analyzer/
 
 ## Features
 
