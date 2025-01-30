@@ -1,0 +1,118 @@
+<!--
+    Author : Benoit (BSM3D) Saint-Moulin
+    2025 © BSM3D
+    www.bsm3d.com
+    Free to use and for Learning purpose.
+    
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Analyzer ©2025 BSM3D</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Pour masquer le conteneur au chargement */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Analyzer</h1>
+
+        <div class="button-container">
+            <input type="file" id="imageInput" accept="image/*" multiple style="display: none">
+            <button onclick="document.getElementById('imageInput').click()">Load image</button>
+            <button id="exportJSON">Export JSON</button>
+            <button id="exportCSV">Export CSV</button>
+            <button id="exportExifText">Export Txt</button>
+            <!-- Bouton pour le mode d'entraînement -->
+            <button id="openTrainingMode">Training Mode</button>
+        </div>
+
+        <div class="main-content">
+            <div class="preview-section">
+                <div id="loading" class="loading">Analysis in progress...</div>
+                <canvas id="imagePreview"></canvas>
+            </div>
+
+            <div class="results-section">
+                <div class="analysis-container">
+                    <div id="analysisData" class="data-panel">
+                        <!-- Résultats d'analyse -->
+                    </div>
+                </div>
+
+                <div class="exif-container">
+                    <div id="exifData" class="data-panel">
+                        <!-- Données EXIF -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteneur de formation (initialement caché) -->
+        <div id="trainingModeContainer" class="hidden">
+            <!-- Le contenu sera ajouté dynamiquement par le script -->
+        </div>
+    </div>
+
+    <!-- Librairies externes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+
+    <!-- Scripts de l'application -->
+    <script src="exif-reader.js"></script>
+    <script src="image-analyzer.js"></script>
+    <script src="export-manager.js"></script>
+    <script src="ui-manager.js"></script>
+
+    <!-- Nouveaux scripts de détection IA -->
+    <script src="ai-detector.js"></script>
+    <script src="training-manager.js"></script>
+    <script src="ui-training.js"></script>
+
+    <!-- Script d'initialisation -->
+    <script>
+        window.addEventListener('load', () => {
+            console.log('Initialisation de l\'application...');
+
+            try {
+                // Initialisation des composants principaux
+                const uiManager = new UIManager();
+
+                // Initialisation des composants IA
+                const aiDetector = new AIDetector();
+                const trainingManager = new TrainingManager(aiDetector);
+                const trainingUI = new AITrainingUI(aiDetector);
+
+                // Gestion du mode d'entraînement
+                const openTrainingModeBtn = document.getElementById('openTrainingMode');
+                const trainingModeContainer = document.getElementById('trainingModeContainer');
+
+                openTrainingModeBtn.addEventListener('click', () => {
+				const isHidden = trainingModeContainer.style.display === 'none';
+
+				trainingModeContainer.style.display = isHidden ? 'block' : 'none';
+
+				trainingUI.container.style.display = isHidden ? 'block' : 'none';
+
+				openTrainingModeBtn.textContent = isHidden
+					? 'Close Training Mode'
+					: 'Training Mode';
+
+				// Vérifiez l'état du conteneur après le clic
+				console.log('Display state of trainingModeContainer after click:', trainingModeContainer.style.display);
+			});
+
+                console.log('Init Ok');
+            } catch (error) {
+                console.error('Init Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
