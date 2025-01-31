@@ -1,5 +1,5 @@
 # Image analyzer
-Version 1.0 (2025)
+Version 0.1 (2025)
 
 By Benoît Saint-Moulin (BSM3D)
 
