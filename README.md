@@ -24,7 +24,7 @@ Key privacy principles include 100% client-side processing, meaning all analysis
 
 ## Demo
 
-you can use and try it : https://bsm3d.com/img_analyzer/
+you can use and try it : https://bsm3d.com/analyse/
 
 ## Features and Development Roadmap
 
